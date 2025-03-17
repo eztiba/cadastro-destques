@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@theme {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-primaryBlue: #00234c;
+  --color-secundaryBlue: #406aab;
+  --color-tertiaryBlue: #234985;
+  --color-headerTable: #01336e;
+  --color-rowTable: #062756;
+}
