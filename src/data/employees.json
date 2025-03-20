@@ -1,0 +1,17 @@
+[
+  { "id": 1, "name": "Ada Lovelace" },
+  { "id": 2, "name": "Albert Einstein" },
+  { "id": 3, "name": "Elvis Presley" },
+  { "id": 4, "name": "Frida Kahlo" },
+  { "id": 5, "name": "Galileo Galilei" },
+  { "id": 6, "name": "Isaac Newton" },
+  { "id": 7, "name": "Jane Austen" },
+  { "id": 8, "name": "Leonardo da Vinci" },
+  { "id": 9, "name": "Ludwig van Beethoven" },
+  { "id": 10, "name": "Mahatma Gandhi" },
+  { "id": 11, "name": "Marie Curie" },
+  { "id": 12, "name": "Martin Luther King Jr." },
+  { "id": 13, "name": "Nikola Tesla" },
+  { "id": 14, "name": "Stephen Hawking" },
+  { "id": 15, "name": "William Shakespeare" }
+]

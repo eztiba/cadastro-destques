@@ -1,7 +1,5 @@
 import "./globals.css";
 import NavBar from "@/components/NavBar";
-import MarginWidthWrapper from "@/components/MarginWidthWrapper";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -9,13 +7,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body>
-        <div className="flex">
-          <NavBar />
-          <main className="flex-1">
-            <MarginWidthWrapper>{children}</MarginWidthWrapper>
-          </main>
-        </div>
+      <body className="flex h-screen flex-col">
+        <NavBar />
+        {children}
       </body>
     </html>
   );

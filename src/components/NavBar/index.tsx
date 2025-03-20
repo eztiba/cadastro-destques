@@ -1,21 +1,43 @@
-"use client";
-
-import React from "react";
-import { SIDENAV_ITEMS } from "@/components/NavBar/constants";
-import MenuItem from "@/components/MenuItem";
-
-const SideNav = () => {
+import Link from "next/link";
+import Image from "next/image";
+const Navbar = () => {
   return (
-    <nav className="bg-secundaryBlue fixed hidden h-screen flex-1 border-r text-white md:flex md:w-60">
-      <div className="m-4 flex w-full flex-col space-y-6">
-        <div className="flex flex-col space-y-2">
-          {SIDENAV_ITEMS.map((item, idx) => {
-            return <MenuItem key={idx} item={item} />;
-          })}
-        </div>
-      </div>
+    <nav className="bg-secundaryBlue mx-auto flex w-full items-center justify-between gap-5 px-4 py-6">
+      <Image src="/images/logo-ons-desktop.png" alt="Logo" width={100} height={100} priority={false} />
+      <ul className="flex items-center gap-6">
+        <li>
+          <Link
+            href="/"
+            className="border-tertiaryBlue flex w-full flex-row items-center rounded-lg border-2 p-2 font-bold"
+          >
+            <span className="flex flex-1 items-center justify-center gap-2 text-xl font-semibold text-white">
+              Tabular
+            </span>
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/calendario"
+            className="border-tertiaryBlue flex w-full flex-row items-center rounded-lg border-2 p-2 font-bold"
+          >
+            <span className="flex flex-1 items-center justify-center gap-2 text-xl font-semibold text-white">
+              Calendário
+            </span>
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/cadastrar"
+            className="border-tertiaryBlue flex w-full flex-row items-center rounded-lg border-2 p-2 font-bold"
+          >
+            <span className="flex flex-1 items-center justify-center gap-2 text-xl font-semibold text-white">
+              Cadastrar
+            </span>
+          </Link>
+        </li>
+      </ul>
     </nav>
   );
 };
 
-export default SideNav;
+export default Navbar;
