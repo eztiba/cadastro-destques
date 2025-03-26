@@ -1,7 +1,7 @@
 "use client";
 import { useState, FormEvent } from "react";
 import employees from "@/data/employees.json";
-import projects from "@/data/projects.json";
+// import projects from "@/data/projects.json";
 
 export default function Form() {
   const [isLoading, setIsLoading] = useState(false);
@@ -70,13 +70,14 @@ export default function Form() {
         <label htmlFor="FormControlSelectProject" className="text-textMain block">
           Projeto:
         </label>
-        <select id="FormControlSelectProject" name="projeto" className="mt-1 w-full rounded border p-2">
+        <input type="text" id="FormControlProject" name="projeto" className="mt-1 w-full rounded border p-2" required />
+        {/* <select id="FormControlSelectProject" name="projeto" className="mt-1 w-full rounded border p-2">
           {projects.map((project) => (
             <option key={project.id} value={project.projeto}>
               {project.projeto}
             </option>
           ))}
-        </select>
+        </select> */}
       </div>
       <div className="mb-4">
         <label htmlFor="FormControlInputWho" className="text-textMain block">

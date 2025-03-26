@@ -1,6 +1,11 @@
-// EventModal.jsx
 import React from "react";
 import { Modal } from "react-bootstrap";
+import { Event } from "@/type";
+
+interface Props {
+  evento: Event;
+  onClose: () => void;
+}
 
 const EventModal = ({ evento, onClose }: Props) => {
   return (

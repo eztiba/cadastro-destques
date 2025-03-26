@@ -10,7 +10,7 @@ export async function POST(request: Request) {
 
     // Lê o conteúdo do arquivo JSON
     const fileContent = fs.readFileSync(DATA_FILE_PATH, "utf-8");
-    const data = JSON.parse(fileContent);
+    const data: { id: number }[] = JSON.parse(fileContent);
 
     const lastId = data.length > 0 ? Math.max(...data.map((item) => item.id)) : 0;
     const newId = lastId + 1;

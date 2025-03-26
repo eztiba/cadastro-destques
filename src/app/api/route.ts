@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { NextRequest, NextResponse } from "next/server";
+import { Destaques } from "@/type";
 
 export async function GET(): Promise<Response> {
   try {
@@ -11,15 +12,26 @@ export async function GET(): Promise<Response> {
     const data = await fs.readFile(filePath, "utf-8");
 
     // Parse do JSON
-    const jsonData = JSON.parse(data);
+    const jsonData: Destaques[] = JSON.parse(data);
 
     return new Response(JSON.stringify(jsonData), {
       headers: {
         "Content-Type": "application/json",
       },
     });
-  } catch (error) {
-    return new Response(JSON.stringify({ message: "Erro ao ler o arquivo JSON", error: error.message }), {
+  } catch (error: unknown) {
+    // Verificando se o erro é uma instância de Error
+    if (error instanceof Error) {
+      return new Response(JSON.stringify({ message: "Erro ao ler o arquivo JSON", error: error.message }), {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
+
+    // Caso o erro não seja uma instância de Error
+    return new Response(JSON.stringify({ message: "Erro desconhecido", error: "Erro não identificado" }), {
       status: 500,
       headers: {
         "Content-Type": "application/json",

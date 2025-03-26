@@ -7,7 +7,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 
 const BasicCalendar = () => {
-  const [eventoSelecionado, SeteventoSelecionado] = useState(null);
+  const [eventoSelecionado, SeteventoSelecionado] = useState<Event | null>(null);
   const [evento, setEvento] = useState<Event[]>([]);
 
   useEffect(() => {
@@ -20,8 +20,9 @@ const BasicCalendar = () => {
     fetchData();
   }, []);
 
-  const handleEventClick = (evento) => {
-    SeteventoSelecionado(evento);
+  const handleEventClick = (event: unknown): void => {
+    const customEvent = event as Event;
+    SeteventoSelecionado(customEvent);
   };
   const handleEventClose = () => {
     SeteventoSelecionado(null);
@@ -46,7 +47,7 @@ const BasicCalendar = () => {
 
   return (
     <>
-      <Calendar events={evento} onSelectEvent={handleEventClick} />
+      <Calendar events={evento} onSelectEvent={(event) => handleEventClick(event)} />
       {eventoSelecionado && <EventModal evento={eventoSelecionado} onClose={handleEventClose} />}
     </>
   );
