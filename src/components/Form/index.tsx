@@ -37,6 +37,7 @@ export default function Form() {
         setMessage(data.message); // Mensagem de erro
       }
     } catch (error) {
+      console.log("Erro ao enviar o formulário:", error);
       setMessage("Erro ao enviar formulário. Tente novamente mais tarde.");
     } finally {
       setIsLoading(false);
@@ -44,7 +45,7 @@ export default function Form() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="bg-tertiaryBlue mx-auto max-w-lg rounded-xl p-4 shadow-md">
+    <form onSubmit={onSubmit} className="bg-tertiaryBlue w-128 rounded-xl p-4 shadow-md">
       {message && (
         <div
           className={`mb-4 p-2 ${message.includes("sucesso") ? "bg-green-500" : "bg-red-500"} text-textMain rounded`}

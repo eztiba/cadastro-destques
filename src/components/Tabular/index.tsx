@@ -1,43 +1,72 @@
-"use client";
-import { useEffect, useState } from "react";
-import { Destaques } from "@/type";
 import { Trash2 } from "lucide-react";
+import { Destaques } from "@/type";
+import { useState, useEffect } from "react";
 
-const Tabular = () => {
-  const [data, setData] = useState<Destaques[]>([]);
+// Tipagem
+interface TabularProps {
+  eventos: Destaques[];
+  handleDelete: (id: number) => void;
+}
+
+// Funções auxiliares para formatação e filtragem
+const filterEventsByDate = (data: Destaques[], startDate: Date, endDate: Date) => {
+  return data.filter((evento) => {
+    const eventoDate = new Date(evento.data);
+    return eventoDate >= startDate && eventoDate <= endDate;
+  });
+};
+
+const Tabular = ({ eventos, handleDelete }: TabularProps) => {
+  // Estado inicializado com todos os eventos
+  const [filteredEvents, setFilteredEvents] = useState<Destaques[]>([]);
+
+  // Inicializar e carregar os todos os eventos
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch("/api");
-      const data = await response.json();
-      setData(data);
-    };
-    fetchData();
-  }, []);
+    setFilteredEvents(eventos);
+  }, [eventos]);
 
-  const handleDelete = async (id: number) => {
-    const id_delete = id;
-    try {
-      const response = await fetch(`/api?id=${id_delete}`, {
-        method: "DELETE",
-      });
+  const handleThisWeek = () => {
+    const today = new Date();
+    const startOfWeek = today.getDate() - today.getDay();
+    const startDate = new Date(today.setDate(startOfWeek));
+    const endDate = new Date(startDate);
+    endDate.setDate(startDate.getDate() + 6);
 
-      if (response.ok) {
-        const responseData = await response.json();
-        setData((prevItems) => prevItems.filter((item) => item.id !== id));
-        console.log("deleteSupabaseItem - ResponseOK - data deleted", responseData);
-      } else {
-        const responseData = await response.json();
-        console.log("deleteSupabaseItem - Response not OK", responseData);
-      }
-    } catch (error) {
-      const responseData = await response.json();
-      console.log("deleteSupabaseItem - try/catch error", responseData);
-      console.error("deleteSupabaseItem - try/catch error - error", error);
-    }
+    const filteredData = filterEventsByDate(eventos, startDate, endDate);
+    setFilteredEvents(filteredData);
+  };
+
+  const handleNextWeek = () => {
+    const today = new Date();
+    const startOfNextWeek = today.getDate() - today.getDay() + 7;
+    const startDate = new Date(today.setDate(startOfNextWeek));
+    const endDate = new Date(startDate);
+    endDate.setDate(startDate.getDate() + 6);
+
+    const filteredData = filterEventsByDate(eventos, startDate, endDate);
+    setFilteredEvents(filteredData); // Atualiza o estado com eventos filtrados para a próxima semana
+  };
+
+  const handleCleanFilters = () => {
+    setFilteredEvents(eventos); // Limpa o filtro e mostra todos os eventos
   };
 
   return (
-    <div className="m-4 p-2">
+    <div className="m-4 flex flex-col gap-4 p-2">
+      <div className="flex flex-row justify-between">
+        <div className="flex flex-row gap-4">
+          <button className="bg-secundaryBlue text-textMain rounded p-2 hover:bg-blue-600" onClick={handleThisWeek}>
+            Essa Semana
+          </button>
+          <button className="bg-secundaryBlue text-textMain rounded p-2 hover:bg-blue-600" onClick={handleNextWeek}>
+            Próxima Semana
+          </button>
+        </div>
+        <button className="bg-secundaryBlue text-textMain rounded p-2 hover:bg-blue-600" onClick={handleCleanFilters}>
+          Limpar Filtros
+        </button>
+      </div>
+
       <table className="min-w-full table-auto border-collapse">
         <thead>
           <tr>
@@ -51,7 +80,7 @@ const Tabular = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item) => (
+          {filteredEvents.map((item) => (
             <tr key={item.id} className="even:bg-primaryBlue odd:bg-rowTable">
               <td className="text-textMain px-4 py-2 text-center">{item.projeto}</td>
               <td className="text-textMain px-4 py-2 text-center">{item.responsavel}</td>
