@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Destaques } from "@/type/destaques";
+import { Destaques } from "@/type";
 import { Trash2 } from "lucide-react";
 
 const Tabular = () => {
@@ -16,7 +16,6 @@ const Tabular = () => {
 
   const handleDelete = async (id: number) => {
     const id_delete = id;
-
     try {
       const response = await fetch(`/api?id=${id_delete}`, {
         method: "DELETE",

@@ -70,14 +70,5 @@
     "data": "2025-07-09",
     "hora": "07:30",
     "detalhes": "Avaliar o progresso do projeto e discutir próximos passos"
-  },
-  {
-    "id": 10,
-    "responsavel": "William Shakespeare",
-    "projeto": "IHM",
-    "reuniao": "PDP",
-    "data": "2025-03-04",
-    "hora": "18:00",
-    "detalhes": "Reunião com Arthur Santa Rosa"
   }
 ]
